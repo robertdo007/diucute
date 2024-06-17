@@ -12,39 +12,57 @@
 </head>
 <body>
     <script src="main.js"></script>
-
+    <audio id="sound" src="https://ainest.life/hpbd/videoplayback.mp4" preload="auto"></audio>
     <div class="greetings">
     <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
         <span>Cho</span>
-        <span>Diệu</span>
+        <span>Em</span>
         <span>Bông</span>
         <span>Hoa</span>
-        <span>Nàyy</span>
-        <span>👀👀</span>
+        <span>Nàyyy</span>
+        
         
     </div>
     <div class="description">
-        <span>Happy Birthday To You 🥳🥳 </span>
+        <span> </span>
     </div> 
         
 
         <button class="button" onclick="openNewTab()"> 🌷🌷🌷 </button>
-        <audio id="audioPlayer">
-        <source src="https://ainest.life/hpbd/audio.MP4" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+        
 
     
     <script>
         function openNewTab() {
             window.open('flower.html', '_blank');
-            playAudio()
-        }
-        var audio = document.getElementById('audioPlayer');
+            
+        };
+        
 
-        function playAudio() {
-            audio.play();
-        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sound = document.getElementById('sound');
+
+            // Attempt to play the sound
+            var playPromise = sound.play();
+
+            // Check if the promise is rejected due to autoplay policy
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay started successfully
+                    console.log('Autoplay started');
+                }).catch((error) => {
+                    // Autoplay was prevented
+                    console.log('Autoplay prevented:', error);
+
+                    // Provide a fallback to play sound on user interaction
+                    document.body.addEventListener('click', function() {
+                        sound.play();
+                    }, { once: true });
+                });
+            }
+        });
     </script>
 </body>
 </html>
