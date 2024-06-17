@@ -58,10 +58,10 @@
 
                     // Provide a fallback to play sound on user interaction
                     document.body.addEventListener('click', function() {
-                        
-                    playSound(); // Play the sound if not already playing
-                }
-
+                       sound.play();
+                    }, { once: true });
+                });
+            }
         });
 
     </script>
